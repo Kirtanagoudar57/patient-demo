@@ -29,9 +29,9 @@ export function sortPatients(patients: Patient[], sort: SortState): Patient[] {
 }
 
 const COLUMNS: Array<{ key: SortKey; label: string; className?: string }> = [
-  { key: "id", label: "ID", className: "w-20" },
+  { key: "id", label: "ID", className: "w-16" },
   { key: "name", label: "Name" },
-  { key: "age", label: "Age", className: "w-20" },
+  { key: "age", label: "Age", className: "w-16" },
   { key: "gender", label: "Gender", className: "hidden sm:table-cell" },
   { key: "disease", label: "Condition", className: "hidden md:table-cell" },
 ];
@@ -59,7 +59,8 @@ export function PatientsTable({ patients, sort, onSortChange, onEdit, onDelete }
   };
 
   return (
-    <div className="overflow-x-auto">
+    // `relative` keeps absolutely positioned children (sr-only labels) inside the scroll area.
+    <div className="relative overflow-x-auto">
       <table className="min-w-full text-left text-sm">
         <thead className="border-b border-slate-200 bg-slate-50/60 text-xs font-medium uppercase tracking-wide text-slate-500">
           <tr>
@@ -67,7 +68,7 @@ export function PatientsTable({ patients, sort, onSortChange, onEdit, onDelete }
               <th
                 key={column.key}
                 scope="col"
-                className={cn("px-5 py-3 font-medium", column.className)}
+                className={cn("px-3 py-3 sm:px-5 font-medium", column.className)}
                 aria-sort={
                   sort?.key === column.key ? (sort.direction === "asc" ? "ascending" : "descending") : undefined
                 }
@@ -75,10 +76,10 @@ export function PatientsTable({ patients, sort, onSortChange, onEdit, onDelete }
                 {header(column)}
               </th>
             ))}
-            <th scope="col" className="hidden px-5 py-3 font-medium lg:table-cell">
+            <th scope="col" className="hidden px-3 py-3 sm:px-5 font-medium lg:table-cell">
               Type
             </th>
-            <th scope="col" className="px-5 py-3 text-right font-medium">
+            <th scope="col" className="px-3 py-3 sm:px-5 text-right font-medium">
               <span className="sr-only">Actions</span>
             </th>
           </tr>
@@ -86,22 +87,22 @@ export function PatientsTable({ patients, sort, onSortChange, onEdit, onDelete }
         <tbody className="divide-y divide-slate-100">
           {patients.map((patient) => (
             <tr key={patient.id} className="hover:bg-slate-50/70">
-              <td className="px-5 py-3 tabular-nums text-slate-500">#{patient.id}</td>
-              <td className="max-w-[14rem] px-5 py-3">
+              <td className="px-3 py-3 sm:px-5 tabular-nums text-slate-500">#{patient.id}</td>
+              <td className="max-w-[14rem] px-3 py-3 sm:px-5">
                 <Link to={`/patients/${patient.id}`} className="block truncate font-medium text-slate-900 hover:text-brand-700">
                   {patient.name}
                 </Link>
               </td>
-              <td className="px-5 py-3 tabular-nums text-slate-700">{patient.age}</td>
-              <td className="hidden px-5 py-3 text-slate-700 sm:table-cell">{patient.gender}</td>
-              <td className="hidden max-w-[14rem] truncate px-5 py-3 text-slate-700 md:table-cell">
+              <td className="px-3 py-3 sm:px-5 tabular-nums text-slate-700">{patient.age}</td>
+              <td className="hidden px-3 py-3 sm:px-5 text-slate-700 sm:table-cell">{patient.gender}</td>
+              <td className="hidden max-w-[14rem] truncate px-3 py-3 sm:px-5 text-slate-700 md:table-cell">
                 {patient.disease || <span className="text-slate-400">—</span>}
               </td>
-              <td className="hidden px-5 py-3 lg:table-cell">
+              <td className="hidden px-3 py-3 sm:px-5 lg:table-cell">
                 <Badge tone={patient.patient_type === "Minor" ? "amber" : "neutral"}>{patient.patient_type}</Badge>
               </td>
-              <td className="px-5 py-3">
-                <div className="flex justify-end gap-1">
+              <td className="px-3 py-3 sm:px-5">
+                <div className="flex justify-end gap-0.5 sm:gap-1">
                   <Link
                     to={`/patients/${patient.id}`}
                     className="rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"

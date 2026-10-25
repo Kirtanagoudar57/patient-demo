@@ -60,6 +60,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
         <input
           ref={ref}
           id={inputId}
+          aria-required={required || undefined}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
           className={controlClass(Boolean(error), cn("h-10", trailing ? "pr-10" : undefined, className))}
@@ -88,6 +89,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(funct
       <select
         ref={ref}
         id={selectId}
+        aria-required={required || undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${selectId}-error` : hint ? `${selectId}-hint` : undefined}
         className={controlClass(Boolean(error), cn("h-10", className))}

@@ -71,7 +71,7 @@ export function AgeDistributionChart({ data }: { data: CountItem[] }) {
             <YAxis allowDecimals={false} {...axisProps} />
             <Tooltip content={<ChartTooltip />} cursor={{ stroke: GRID_COLOR, strokeWidth: 1 }} />
             <Line
-              type="monotone"
+              type="linear"
               dataKey="count"
               stroke={SERIES_COLOR}
               strokeWidth={2}
